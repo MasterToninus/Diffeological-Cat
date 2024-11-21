@@ -121,7 +121,8 @@
 		\providecommand{\Obj}{\mathit{Ob}} %Back-compatibility
 	%collection of arrows between two objects
 		\providecommand{\mor}{hom} %Back-compatibility
-		\providecommand{\hom}{\mathit{hom}}
+		\providecommand{\Hom}{\mathit{Hom}}
+		% careful to distinguish between the internal hom and the external hom!
 	%collection of all the arrows (morphisms) forming the category
 		\providecommand{\Mor}{\mathit{Mor}} %Back-compatibility
 		\providecommand{\Arr}{\mathit{Arr}}
@@ -129,6 +130,11 @@
 		\providecommand{\iso}{\textrm{iso}}
 	%collection of arrows that are iso
 		\providecommand{\Iso}{\mathit{Iso}}
+	%opposite
+		\providecommand{\op}{\textrm{op}}		
+		
+	%Category of Sets
+		\providecommand{\Set}{\cat[Set]}		
 }
 
 %% 'Geometric Mechanics' option

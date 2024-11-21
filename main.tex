@@ -5,7 +5,7 @@
 
 \usepackage{amsmath, amssymb, hyperref}
 
-\usepackage[subpreambles=true]{standalone}
+%\usepackage[subpreambles=true]{standalone}
 \usepackage{commath}
 
 \usepackage[english]{babel}
@@ -13,25 +13,17 @@
 
 
 \usepackage{graphicx}
-\usepackage{hyperref}
+
 
 \usepackage[basic,cat]{./Math-Symbols-List/toninus-math-symbols}
 \usepackage{./Latex-Theorem/theoremtemplate}
-
+\usepackage{./visualcat}
 
 
 %Diagrammatic
 \usepackage{tikz-cd}
 \usepackage{xcolor}
 \usepackage{fdsymbol}
-	% bulk of arrows and objects
-	\newcommand{\bulk}{\blacklozenge}
-	% such that
-	\newcommand{\St}{\textrm{s.t.}}
-	% id est
-	\newcommand{\ie}{\textrm{\emph{i.e.}}}
-	% commuting
-	\newcommand{\commute}{\circledequal}%\circlearrowleft
 
 
 
@@ -46,39 +38,155 @@
 \maketitle
 
 \begin{abstract}
-Diffeological spaces generalize smooth manifolds, providing a robust framework for studying "generalized spaces." A diffeological space consists of a set $X$ equipped with a collection of "plots"—smooth maps from open subsets of Euclidean spaces into $X$—that satisfy three basic axioms. While individual diffeological spaces may exhibit geometric pathologies absent in smooth manifolds, the category $\mathbf{Diff}$ of all diffeological spaces possesses numerous desirable categorical properties that the category of smooth manifolds lacks.
+Diffeological spaces generalize smooth manifolds, providing a robust framework for studying "generalized spaces." A diffeological space consists of a set $X$ equipped with a collection of "plots" — smooth maps from open subsets of Euclidean spaces into $X$ — that satisfy three basic axioms. While individual diffeological spaces may exhibit geometric pathologies absent in smooth manifolds, the category $\mathbf{Diff}$ of all diffeological spaces possesses numerous desirable categorical properties that the category of smooth manifolds lacks.
 
-This talk will provide a concise introduction to diffeological spaces, the concept of a concrete site, and concrete sheaves. We will demonstrate that $\mathbf{Diff}$ can be identified as a category of "concrete sheaves on a concrete site," making it an archetypal example of a "generalized space." The remainder of the discussion will focus on the structural properties of this class of categories. Notably, any category of concrete sheaves on a concrete site—including $\mathbf{Diff}$—is a quasitopos, enjoying the existence of all limits and colimits.
+This note will provide a concise introduction to diffeological spaces, the concept of a concrete site, and concrete sheaves. We will demonstrate that $\mathbf{Diff}$ can be identified as a category of "concrete sheaves on a concrete site," making it an archetypal example of a "generalized space." The remainder of the discussion will focus on the structural properties of this class of categories. Notably, any category of concrete sheaves on a concrete site — including $\mathbf{Diff}$ — is a quasitopos, enjoying the existence of all limits and colimits.
 \end{abstract}
+
+
+The foundational observation for a categorical approach to diffeological spaces is that a \emph{diffeology} \(\mathcal{D}\) on a set \(X\) can be understood as a \emph{presheaf} on the category of open subsets of Euclidean spaces, with smooth maps as morphisms. Specifically, to each open set \(U \subseteq \mathbb{R}^n\), it assigns a subset of \(\text{Set}(U, X)\), the set of all functions from \(U\) to \(X\) prescribed to be "smooth". 
+A \emph{diffeological space} is then defined as a set equipped with a diffeology.
+
+
+
+
 
 \section{Prerequisites}
 
 \subsection{Presheaves}
-\begin{itemize}
-    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/presheaf}{Presheaf}
-    \item \href{https://ncatlab.org/nlab/show/Yoneda+embedding}{Yoneda Embedding}
-    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/representable+functor}{Representable Presheaf}
-    \item Concrete categories and presheaves
-\end{itemize}
+Let $\cat$ be an arbitrary category\footnote{All categories considered are locally small.}.
+
+\begin{definition}[Presheaf over $\cat$ \cite{nlab:presheaf}]
+A preshef is a functor 
+$ F: \cat^\op \to \Set$.
+\\
+The collection of all presheaves forms the category $[\cat^\op,\Set]$ whose objects are presheaves and morphisms are natural transformations.
+\end{definition}
+
+\begin{example}[Yoneda Embedding\cite{nlab:yoneda_embedding}]
+For $\cat$ a locally small category, every object $c\in \cat$ induces a presheaf $Y(c)$ called \emph{the representable presheaf represented by $c$}.
+This assignment extends to a functor called \emph{Yoneda embedding}
+
+\begin{equation}
+	.
+\end{equation}
+
+Hence $Y$ sends any object $c\in\cat$ to the the \emph{representable presheaf}\cite{nlab:representable_functor} which assigns to any other object $d \in \cat$ the hom-set of morphisms from $d$ into $c$.
+The \emph{Yoneda lemma}\cite{nlab:yoneda_lemma} implies that this functor is full and faithful and hence realizes $\cat$ as a full subcategory inside its category of presheaves.
+ 
+\end{example}
+
+\begin{example}\label{ex:topolo-presheaf}
+Let $X$ be a topological space, one can introduce the category of open sets:
+%
+	\catdef{\cat{Op}(X)}{todo}
+	{todo}
+%
+Where objects are elements of the topology of $X$ and morphisms are inclusion of open set into another one.
+A presheaf $\cat[Op](X)^\op \to \Set$ is exactly what we call a presheaf in topology.
+\end{example}
+In topology, a sheaf is defined as a presheaf that satisfies a specific gluing condition. This condition can be expressed using categorical language through the concept of sites.
+
+
 
 \subsection{Sites}
-\begin{itemize}
-    \item \textbf{Definition:} Site
-    \item \textbf{Definition:} Coverage
-    \item \textbf{Definition:} Grothendieck Pretopology
-    \item \textbf{Definition:} Sieves
-    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/Grothendieck+topology#original_definition}{Grothendieck Topology}
-    \item \textbf{Definition:} Concrete sites
-    \item \textbf{Definition:} Subcanonical sites
-\end{itemize}
+Let $\cat$ be any small category.
+
+\begin{definition}[Site]
+	A site is a small category equipped with a coverage.
+\end{definition}
+
+\begin{definition}[Coverage]
+	A Coverage is the assigment to each object $U \in \cat$ of a collection of families of arrows $\{f_i:U_i\to U\}_{i\in I}$, called \emph{covering families}, such that
+\begin{enumerate}
+	\item For any given $\{f_i:U_i\to U\}_{i\in I}$ covering family and $g:V\to U$ morphism, there exists a covering family $\{h_j:V_j\to V\}$ such that each composite $g \circ h_j$ factors through some $f_i$.
+	\begin{displaymath}
+		\begin{tikzcd}
+		V_j \ar[r,"k"] \ar[d,"h_j"] & U_i \ar[d,"f_i"] \\
+		V \ar[r,"g"] & W
+		\end{tikzcd}
+	\end{displaymath}
+	%
+	(NB. The logic here is: $\forall$ $f$ covering family , $\forall g$ morphism, $\exists h$ covering family such that $ \forall j, \exists i, \exists k \colon$ such that the above commutes.)
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+	Given a topological space $X$, the category $\cat{Op}(X)$ is a site.
+	Here a covering family for an open set $U$ is a family of open sets $U_i \hookrightarrow U$ such that $U_{i\in I} = U$. 
+\end{example}
+Actually it is more! Is a Grothendieck pretopology:
+
+\begin{definition}[Grothendieck pretopology]
+A Grothendieck pretopology on $\cat$ is an assignment to each object  $U$ of $C$ of a collection of families $\{U_i \to U\}$ of morphisms, called \emph{covering families} such that
+\begin{enumerate}
+	\item (Stability under base changes.)
+The collection of covering families is stable under pullback: if $\{U_i \to U\}$ is a covering family and $f : V \to U$ is any morphism in $C$, then $\{f^* U_i \to V\}$ exists and is a covering family;
+	\item (Stability under composition.)
+If $\{U_i \to U\}_{i \in I}$ is a covering family and for each $i$ also $\{U_{i,j} \to U_i\}_{j \in J_i}$ is a covering family, then also the family of composites $\{U_{i,j} \to U_i \to U\}_{i\in I, j \in J_i}$ is a covering family.
+	\item (Isomorphisms cover.)
+Every family consisting of a single isomorphism $\{V \stackrel{\cong}{\to}U\}$ is a covering family;
+\end{enumerate}
+\end{definition}
+
+N.b. condition 1) of the previous two definitions are equivalent.
+
+A \emph{concrete site} is a site whose objects can be thought of as sets with extra structure. 
+\begin{definition}[Concrete site]
+	A \emph{concrete site} is a site $\cat$ with a terminal object $*$ such that
+	\begin{enumerate}
+		\item the functor $\Hom_{\cat}(*,-) : \cat \to \Set$ is a faithful functor;
+		\item for every covering family $\{f_i : U_i \to U\}$ in $\cat$ the morphism 
+
+   $$
+     \coprod_i \Hom_{\cat} (*,f_i) : \coprod_i \Hom_{\cat} (*, U_i) \to \Hom_{\cat} (*, U) 
+   $$
+   is surjective.
+	\end{enumerate}
+\end{definition}
+
+
+In a category of presheaves on a concrete site one can consider concrete presheaves.
+
+\begin{definition}[Concrete presheaf]
+ TRICKY!!! guarda note vecchie!
+\end{definition}
+
+
 
 \subsection{Sheaves}
+
+\begin{definition}[Sheaf]
+Let $(\cat,J)$ be a site in the form of a small category $\cat$ equipped with a coverage $J$.
+\\
+A presheaf $A \in [\cat^\op,\Set]$ is a \emph{sheaf} with respect to $J$ if
 \begin{itemize}
-    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/sheaf#GeneralDefinitionAbstractly}{Sheaf}
-    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/Grothendieck+topos}{Grothendieck Topos}
-    \item \textbf{Definition:} Concrete Sheaves
-    \item \textbf{Theorem:} 5.25 (BH11): The category of concrete sheaves is a quasitopos
+	\item for every covering family $\{p_i : U_i \to U\}_{i \in I}$ in $J$;
+	\item and for every compatible family of elements, given by tuples $(s_i \in A(U_i))_{i \in I}$ such that for all $j,k \in I$ and all morphisms $U_j \stackrel{f}{\leftarrow} K \stackrel{g}{\to} U_k$ in $C$ with $p_j \circ f = p_k \circ g$ we have $A(f)(s_j) = A(g)(s_k) \in A(K)$
 \end{itemize}
+then
+\begin{itemize}
+	\item there is a  unique  element $s \in A(U)$ such that $A(p_i)(s) = s_i$ for all $i \in I$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Subcanonical sites]
+ We call a site $\cat$ subcanonical if every representable functor $Y(c): \cat^\op \to \Set$ is a sheaf.
+\end{definition}
+
+The category of all \href{https://ncatlab.org/nlab/show/sheaf#GeneralDefinitionAbstractly}{sheaves} on a site is extremely nice: it is a \href{https://ncatlab.org/nlab/show/topos#definitions}{topos}. 
+The category of concrete sheaves on a concrete site is also nice, but slightly less so: it is a ‘quasitopos’. 
+
+\begin{definition}[{Quasitopos \cite[Def. 3.1]{Baez2011}}]
+A quasitopos is a \href{https://ncatlab.org/nlab/show/locally+cartesian+closed+category#definition}{locally Cartesian closed} category with finite colimits and a \href{https://ncatlab.org/nlab/show/subobject+classifier#weak_subobject_classifier}{weak subobject classifier}.
+\end{definition}
+
+\begin{theorem}[{\cite[Thm. 5.25]{Baez2011}}]
+For any concrete site $\cat[D]$, the category of concrete sheaves over $\cat[D]$ is a quasitops with all (small) limits an colimits.
+\end{theorem}
+
+
+
 
 \section{ Diffeological Spaces as a Category of Concrete Sheaves}
 \begin{itemize}
@@ -90,7 +198,7 @@ This talk will provide a concise introduction to diffeological spaces, the conce
     \item \textbf{Theorem:} 2.1.11: The category of diffeological spaces is equivalent to concrete sheaves over $\textbf{Eucl}$
 \end{itemize}
 
-\section{Categorical Properties of $\textbf{Diff}$}
+\section{Some categorical Properties of $\textbf{Diff}$}
 \subsection*{Diffeological Mapping Spaces}
 \begin{itemize}
     \item $\textbf{Diff}$ is \href{https://ncatlab.org/nlab/show/locally+cartesian+closed+category}{locally Cartesian closed}
@@ -112,5 +220,33 @@ This talk will provide a concise introduction to diffeological spaces, the conce
 \begin{itemize}
     \item Computing limits and colimits
 \end{itemize}
+
+
+
+\appendix
+
+\section*{Appendix: Basic stuff}
+
+\begin{definition}[Concrete category]\label{def:concrete_cat}
+A category $\cat$ is called \emph{concrete} if it is equipped with a faithful functor 
+$$
+|\cdot| : \cat \to \Set.
+$$
+This functor, referred to as the \emph{forgetful functor}, assigns to each object $c \in \cat$ its \emph{underlying set} \(|c|\).
+\end{definition}
+
+\begin{remark}\label{rem:concrete_terminal}
+	In practice, the objects of a concrete category are sets equipped with additional structure, and the morphisms are structure-preserving maps between these sets.\\
+	If $\cat$  has a terminal object $*$, the concrete structure is often determined by the \emph{functor of points}, given by $(c \mapsto \Hom_{\cat} (*, c))$.
+
+\end{remark}
+
+%=========================================================================#
+% Bibliography (BibTex)
+% https://arxiv.org/hypertex/bibstyles/
+%=========================================================================#
+			\bibliographystyle{hep}
+			\bibliography{bibliography}
+
 
 \end{document}
