@@ -1,0 +1,116 @@
+
+
+\documentclass[a4paper,11pt,fleqn]{article}  %Per La Stampa
+\usepackage[a4paper, margin=2cm]{geometry}
+
+\usepackage{amsmath, amssymb, hyperref}
+
+\usepackage[subpreambles=true]{standalone}
+\usepackage{commath}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\usepackage[basic,cat]{./Math-Symbols-List/toninus-math-symbols}
+\usepackage{./Latex-Theorem/theoremtemplate}
+
+
+
+%Diagrammatic
+\usepackage{tikz-cd}
+\usepackage{xcolor}
+\usepackage{fdsymbol}
+	% bulk of arrows and objects
+	\newcommand{\bulk}{\blacklozenge}
+	% such that
+	\newcommand{\St}{\textrm{s.t.}}
+	% id est
+	\newcommand{\ie}{\textrm{\emph{i.e.}}}
+	% commuting
+	\newcommand{\commute}{\circledequal}%\circlearrowleft
+
+
+
+
+\title{Reading Talk \\ Categorical approach to diffeological spaces}
+%\title{On the Convenient Category of Diffeological Spaces}
+\author{Tony}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Diffeological spaces generalize smooth manifolds, providing a robust framework for studying "generalized spaces." A diffeological space consists of a set $X$ equipped with a collection of "plots"—smooth maps from open subsets of Euclidean spaces into $X$—that satisfy three basic axioms. While individual diffeological spaces may exhibit geometric pathologies absent in smooth manifolds, the category $\mathbf{Diff}$ of all diffeological spaces possesses numerous desirable categorical properties that the category of smooth manifolds lacks.
+
+This talk will provide a concise introduction to diffeological spaces, the concept of a concrete site, and concrete sheaves. We will demonstrate that $\mathbf{Diff}$ can be identified as a category of "concrete sheaves on a concrete site," making it an archetypal example of a "generalized space." The remainder of the discussion will focus on the structural properties of this class of categories. Notably, any category of concrete sheaves on a concrete site—including $\mathbf{Diff}$—is a quasitopos, enjoying the existence of all limits and colimits.
+\end{abstract}
+
+\section{Prerequisites}
+
+\subsection{Presheaves}
+\begin{itemize}
+    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/presheaf}{Presheaf}
+    \item \href{https://ncatlab.org/nlab/show/Yoneda+embedding}{Yoneda Embedding}
+    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/representable+functor}{Representable Presheaf}
+    \item Concrete categories and presheaves
+\end{itemize}
+
+\subsection{Sites}
+\begin{itemize}
+    \item \textbf{Definition:} Site
+    \item \textbf{Definition:} Coverage
+    \item \textbf{Definition:} Grothendieck Pretopology
+    \item \textbf{Definition:} Sieves
+    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/Grothendieck+topology#original_definition}{Grothendieck Topology}
+    \item \textbf{Definition:} Concrete sites
+    \item \textbf{Definition:} Subcanonical sites
+\end{itemize}
+
+\subsection{Sheaves}
+\begin{itemize}
+    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/sheaf#GeneralDefinitionAbstractly}{Sheaf}
+    \item \textbf{Definition:} \href{https://ncatlab.org/nlab/show/Grothendieck+topos}{Grothendieck Topos}
+    \item \textbf{Definition:} Concrete Sheaves
+    \item \textbf{Theorem:} 5.25 (BH11): The category of concrete sheaves is a quasitopos
+\end{itemize}
+
+\section{ Diffeological Spaces as a Category of Concrete Sheaves}
+\begin{itemize}
+    \item The site of Euclidean spaces $\textbf{Eucl}$
+    \item $\textbf{Eucl}$ is subcanonical
+    \item $\textbf{Eucl}$ is concrete
+    \item Sheaves on $\textbf{Eucl}$ (Definition 2.1.5)
+    \item Concrete presheaves on $\textbf{Eucl}$ (Definition 2.1.9)
+    \item \textbf{Theorem:} 2.1.11: The category of diffeological spaces is equivalent to concrete sheaves over $\textbf{Eucl}$
+\end{itemize}
+
+\section{Categorical Properties of $\textbf{Diff}$}
+\subsection*{Diffeological Mapping Spaces}
+\begin{itemize}
+    \item $\textbf{Diff}$ is \href{https://ncatlab.org/nlab/show/locally+cartesian+closed+category}{locally Cartesian closed}
+    \item Slices have all finite products and exponential objects
+    \item Exponential objects in $\textbf{Diff}$
+\end{itemize}
+
+\subsection*{Discrete and Indiscrete Diffeology}
+\begin{itemize}
+    \item View these as the left and right adjoints of the forgetful functor
+\end{itemize}
+
+\subsection*{Class of Morphisms}
+\begin{itemize}
+    \item Monomorphisms and epimorphisms
+\end{itemize}
+
+\subsection*{Limits}
+\begin{itemize}
+    \item Computing limits and colimits
+\end{itemize}
+
+\end{document}
