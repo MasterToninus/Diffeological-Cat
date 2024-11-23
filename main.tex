@@ -75,17 +75,26 @@ roundcorner=10pt]
 
 %---------------------------------------------------------------------------------------------------------%
 \begin{abstract}
-Diffeological spaces generalize smooth manifolds, providing a robust framework for studying "generalized spaces." A diffeological space consists of a set $X$ equipped with a collection of "plots" — smooth maps from open subsets of Euclidean spaces into $X$ — that satisfy three basic axioms. While individual diffeological spaces may exhibit geometric pathologies absent in smooth manifolds, the category $\mathbf{Diff}$ of all diffeological spaces possesses numerous desirable categorical properties that the category of smooth manifolds lacks.
+Diffeological spaces are a class of geometric structures that generalize the notion of smooth manifolds; in this sense, they provide an instance of a \emph{generalized space}. They consist of a set $X$ equipped with a collection of \emph{plots} — maps from open Euclidean subsets to $X$ — satisfying three simple axioms. 
+While an individual diffeological space can exhibit behaviour far more pathological than a smooth manifold, the category $\Dflg$ of all diffeological spaces enjoys many desirable properties not possessed by the category of smooth manifolds. 
 
-This note will provide a concise introduction to diffeological spaces, the concept of a concrete site, and concrete sheaves. We will demonstrate that $\mathbf{Diff}$ can be identified as a category of "concrete sheaves on a concrete site," making it an archetypal example of a "generalized space." The remainder of the discussion will focus on the structural properties of this class of categories. Notably, any category of concrete sheaves on a concrete site — including $\mathbf{Diff}$ — is a quasitopos, enjoying the existence of all limits and colimits.
+This talk concisely reviews the notions of diffeological spaces, concrete sites, and sheaves. 
+We will show that $\Dflg$ is a category of "concrete sheaves on a concrete site" — also known as "generalized spaces" — and we will employ the rest of our time to exhibit the properties owned by this class of categories. 
+The upshot is that any category of concrete sheaves on a concrete site — and thus the category of diffeological spaces — turns out to be a \emph{quasitopos}, possessing all limits and colimits.
 \end{abstract}
 %---------------------------------------------------------------------------------------------------------%
 
 
-
-
-
 \tableofcontents
+
+
+\begin{mdframed}[middlelinecolor=green,
+middlelinewidth=2pt,
+backgroundcolor=green!10,
+roundcorner=10pt]
+	Probably an unfortunate choice, but an arbitrary category will be denoted by \(\mathbb{C}\). The field of complex numbers will never appear in this text.
+\end{mdframed}
+
 
 \clearpage
 
@@ -129,7 +138,7 @@ The \emph{Yoneda lemma}\cite{nlab:yoneda_lemma} implies that this functor is ful
 \begin{example}\label{ex:topolo-presheaf}
 Let $X$ be a topological space, one can introduce the category of open sets:
 %
-	\catdef{\cat{Op}(X)}{todo}
+	\catdef{\cat[Op](X)}{todo}
 	{todo}
 %
 Where objects are elements of the topology of $X$ and morphisms are inclusion of open set into another one.
@@ -164,8 +173,8 @@ Let $\cat$ be any small category.
 \end{definition}
 
 \begin{example}
-	Given a topological space $X$, the category $\cat{Op}(X)$ is a site.
-	Here a covering family for an open set $U$ is a family of open sets $U_i \hookrightarrow U$ such that $U_{i\in I} = U$. 
+	Given a topological space $X$, the category $\cat[Op](X)$ is a site.
+	Here a covering family for an open set $U$ is a family of open sets $U_i \hookrightarrow U$ such that $\cup_{i\in I}U_i = U$. 
 \end{example}
 Actually it is more! Is a Grothendieck pretopology:
 
@@ -267,7 +276,8 @@ In a category of presheaves on a concrete site one can consider concrete preshea
 \end{definition}
 
 \begin{remark}
-	What does it mean for a presheaf to be concrete? We can regard a concrete presheaf as a set equipped with additional structure. \\
+	What does it mean for a presheaf to be concrete?
+	 We can regard a concrete presheaf as a set equipped with additional structure. \\
 	%
 	When regarding a sheaf as a space defined by how it is probed by test spaces (cf. functorial geometry), a concrete sheaf is a generalized space that has an underlying set of points out of which it is built.
 	So a concrete sheaf models a space that is given by a set of points and a choice of which morphisms of sets from concrete test spaces into it count as “structure preserving” (e.g. count as smooth, when the sheaf models a smooth space).
@@ -321,9 +331,13 @@ If a category $\cat$ has \emph{\href{https://ncatlab.org/nlab/show/pullback}{pul
 \begin{definition}[Cartesian coverage]\label{Def:CartesianCover}
 	Let $\cat$ be a category with pullbacks.
 	A coverage is said to be \emph{cartesian} if for any \(\{f_i : U_i \to U\}_{i \in I}\)  covering family and \(g : V \to U\) morphism, then the family of pullbacks \(\{g^*(f_i) : g^*U_i \to V\}\) is a covering family of \(V\).
-	A small category $\cat$ equipped with a cartesian coverage is called \emph{Cartesian site}\footnote{Beware: usually a category is cartesian when  is \href{https://ncatlab.org/nlab/show/finitely+complete+category\#definition}{finitely complete}.}.
 \end{definition}
 Via a certain \href{https://ncatlab.org/nlab/show/coverage\#saturation_conditions}{"saturation condition"}, in a category with pullbacks, every coverage is equivalent to one satisfying this stronger condition.
+
+\begin{definition}[Cartesian Sites]
+	A \emph{Cartesian site} is a small category \( \cat \) equipped with a cartesian coverage, which is \href{https://ncatlab.org/nlab/show/finitely+complete+category\#definition}{finitely complete} and admits coproducts.
+\end{definition}
+
 
 In a cartesian sites the condition of being subcanonical can be expressed as follows
 \begin{lemma}[{\cite[Pag. 20, Prop. 2.1.13]{Blohmann24}}]\label{lem:subcanon-bloh}
@@ -356,8 +370,8 @@ When $\cat$ has pullbacks (of covering families), the condition for a presheaf \
 \section{ Diffeological Spaces as a Category of Concrete Sheaves}
 %---------------------------------------------------------------------------------------------------------%
 %
-The foundational observation for a categorical approach to diffeological spaces is that a \emph{diffeology} \(\mathcal{D}\) on a set \(X\) can be understood as a \emph{presheaf} on the category of open subsets of Euclidean spaces, with smooth maps as morphisms. 
-Specifically, to each open set \(U \subseteq \mathbb{R}^n\), it assigns a subset of \(\text{Set}(U, X)\), the set of all functions from \(U\) to \(X\) prescribed to be "smooth". 
+The foundational observation for a categorical approach to diffeological spaces is that a \emph{diffeology} \(\cat[D]\) on a set \(X\) can be understood as a \emph{presheaf} on the category of open subsets of Euclidean spaces, with smooth maps as morphisms. 
+Specifically, to each open set \(U \subseteq \Real^n\), it assigns a subset of \(\text{Set}(U, X)\), the set of all functions from \(U\) to \(X\) prescribed to be "smooth". 
 A \emph{diffeological space} is then defined as a set equipped with a diffeology.
 
 
@@ -545,9 +559,9 @@ The pullback diffeology along a monomorphism is also called the \emph{subspace d
 \begin{remark}%[Ordering of Diffeologies]
 Diffeologies on a given set $X$ are partially ordered by inclusion:
 $$
-\mathcal{D} \subseteq \mathcal{D}' \quad \text{if and only if} \quad \mathcal{D}(U) \subseteq \mathcal{D}'(U) \quad \text{for all } U \in \Eucl.
+\cat[D] \subseteq \cat[D]' \quad \text{if and only if} \quad \cat[D](U) \subseteq \cat[D]'(U) \quad \text{for all } U \in \Eucl.
 $$
-In this case, \(\mathcal{D}\) is referred to as \emph{smaller} or \emph{finer} than \(\mathcal{D}'\), while \(\mathcal{D}'\) is called \emph{larger} or \emph{coarser} than \(\mathcal{D}\).
+In this case, \(\cat[D]\) is referred to as \emph{smaller} or \emph{finer} than \(\cat[D]'\), while \(\cat[D]'\) is called \emph{larger} or \emph{coarser} than \(\cat[D]\).
 
 This relationship is analogous to the ordering of topologies: a topology \(\mathcal{T}\) on \(X\) is said to be finer than \(\mathcal{T}'\) if there are fewer \(\mathcal{T}\)-continuous maps than \(\mathcal{T}'\)-continuous maps into \(X\).
 
@@ -573,6 +587,8 @@ This relationship is analogous to the ordering of topologies: a topology \(\math
 \appendix
 \section*{Appendix: Basic stuff}
 %---------------------------------------------------------------------------------------------------------%
+%
+In this section, we gather fundamental definitions for reference.
 %
 \begin{definition}[Concrete category]\label{def:concrete_cat}
 A category $\cat$ is called \emph{concrete} if it is equipped with a faithful functor 
@@ -644,6 +660,35 @@ The category $\cat$ is called \emph{Cartesian closed} \emph{if and only if} it s
 
 \begin{definition}[Locally cartesian closed category]
 	The category $\cat$ is called \emph{locally Cartesian closed} iff for any $c \in\cat$ the overcategory $\cat \downarrow c$ is Cartesian closed.
+\end{definition}
+
+\begin{definition}[Equivalence of categories { \cite[Theorem IV.4.1]{MacLane1978}}]
+A functor \( F : \cat \to \cat[D] \) yields an equivalence of categories if and only if it is simultaneously:
+\begin{itemize}
+    \item \textbf{full}, i.e., for any two objects \( c_1 \) and \( c_2 \) of \(\cat\), the map 
+    \[
+    \Hom_{\cat}(c_1, c_2) \to \Hom_{\cat[D]}(F(c_1), F(c_2))
+    \]
+    induced by \( F \) is \textbf{surjective};
+    
+    \item \textbf{faithful}, i.e., for any two objects \( c_1 \) and \( c_2 \) of \(\cat\), the map 
+    \[
+    \Hom_{\cat}(c_1, c_2) \to \Hom_{\cat[D]}(F(c_1), F(c_2))
+    \]
+    induced by \( F \) is \textbf{injective};
+    
+    \item \textbf{essentially surjective (dense)}, i.e., each object \( d \) in \(\cat[D]\) is isomorphic to an object of the form \( F(c) \), for some \( c \in \cat \).
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Diffeological Spaces {\cite[Def. 1.5]{IZ13}}]
+A \emph{diffeological space} is a set \( X \) together with a collection of maps \( p : U \to X \), called \emph{plots}, for all open subsets \( U \subset \Real^n \), \( n \geq 0 \), that satisfy the following conditions:
+\begin{enumerate}
+    \item Every constant map \( p : U \to X \) is a plot.
+    \item Let \( U \subset \Real^n \) be an open subset and \( \{U_i\}_{i \in I} \) an open cover. If \( p|_{U_i} : U_i \to X \) is a plot for every \( i \in I \), then \( p \) is a plot.
+    \item If \( p : U \to X \) is a plot and \( f : V \to U \) is a smooth map from an open subset \( V \subset \Real^m \), then \( p \circ f \) is a plot.
+\end{enumerate}
+A \emph{morphism of diffeological spaces} \( f : X \to Y \) is a map of sets such that for every plot \( p : U \to X \), the map \( f \circ p : U \to Y \) is a plot. The category of diffeological spaces is denoted by \( \Dflg \).
 \end{definition}
 
 
