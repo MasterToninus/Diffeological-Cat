@@ -68,7 +68,9 @@
 middlelinewidth=2pt,
 backgroundcolor=red!10,
 roundcorner=10pt]
-	\textit{\textbf{Disclaimer:} The content of these notes is not original but is heavily based on the works of Blohmann\cite{Blohmann24}, Baez Hoffnung\cite{Baez2011}, and the entries on the \href{https://ncatlab.org/}{\textit{nLab}}. i.e. it's a reading seminar!}
+	\textit{\textbf{Disclaimer:} The content of these notes is not original but is heavily based on the works of Blohmann\cite{Blohmann24}, Baez Hoffnung\cite{Baez2011}, and the entries on the \href{https://ncatlab.org/}{\textit{nLab}}. 
+	\\
+	\underline{In other words, it's a reading seminar!}}
 \end{mdframed}
 
 
@@ -80,7 +82,7 @@ While an individual diffeological space can exhibit behaviour far more pathologi
 
 This talk concisely reviews the notions of diffeological spaces, concrete sites, and sheaves. 
 We will show that $\Dflg$ is a category of "concrete sheaves on a concrete site" — also known as "generalized spaces" — and we will employ the rest of our time to exhibit the properties owned by this class of categories. 
-The upshot is that any category of concrete sheaves on a concrete site — and thus the category of diffeological spaces — turns out to be a \emph{quasitopos}, possessing all limits and colimits.
+The upshot is that any category of concrete sheaves on a concrete site — and thus the category of diffeological spaces — turns out to be a \emph{quasitopos}, possessing all limits and colimits (among many other convenient properties).
 \end{abstract}
 %---------------------------------------------------------------------------------------------------------%
 
@@ -92,7 +94,7 @@ The upshot is that any category of concrete sheaves on a concrete site — and t
 middlelinewidth=2pt,
 backgroundcolor=green!10,
 roundcorner=10pt]
-	Probably an unfortunate choice, but an arbitrary category will be denoted by \(\mathbb{C}\). The field of complex numbers will never appear in this text.
+	While this may be an unfortunate choice, we will denote an arbitrary category by \(\cat\).  The field of complex numbers will never appear in this text.
 \end{mdframed}
 
 
@@ -129,22 +131,24 @@ This assignment extends to a functor called \emph{Yoneda embedding}
 \begin{equation}
 	\vspace{5em}
 \end{equation}
-
+%
 Hence $Y$ sends any object $c\in\cat$ to the the \emph{representable presheaf}\cite{nlab:representable_functor} which assigns to any other object $d \in \cat$ the hom-set of morphisms from $d$ into $c$.
-The \emph{Yoneda lemma}\cite{nlab:yoneda_lemma} implies that this functor is full and faithful and hence realizes $\cat$ as a full subcategory inside its category of presheaves.
+\\
+The celebrated \emph{Yoneda lemma}\cite{nlab:yoneda_lemma} implies that this functor is full and faithful and hence realizes $\cat$ as a full subcategory inside its category of presheaves.
  
 \end{example}
 
 \begin{example}\label{ex:topolo-presheaf}
 Let $X$ be a topological space, one can introduce the category of open sets:
 %
-	\catdef{\cat[Op](X)}{todo}
-	{todo}
+	\catdef{\cat[Op](X)}{ }
+	{ }
 %
-Where objects are elements of the topology of $X$ and morphisms are inclusion of open set into another one.
+where objects are elements of the topology of $X$, and morphisms are the inclusion of an open set into another one.
 A presheaf $\cat[Op](X)^\op \to \Set$ is exactly what we call a presheaf in topology.
 \end{example}
-In topology, a sheaf is defined as a presheaf that satisfies a specific gluing condition. This condition can be expressed using categorical language through the concept of sites.
+In topology, a sheaf is defined as a presheaf that satisfies a specific gluing condition. 
+This condition can be formalized in the categorical language by introducing the notion of \emph{site}.
 
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -%
@@ -157,7 +161,7 @@ Let $\cat$ be any small category.
 	A site is a small category equipped with a coverage.
 \end{definition}
 
-\begin{definition}[Coverage]
+\begin{definition}[Coverage]\label{Def:coverage}
 	A Coverage is the assigment to each object $U \in \cat$ of a collection of families of arrows $\{f_i:U_i\to U\}_{i\in I}$, called \emph{covering families}, such that
 \begin{enumerate}
 	\item For any given $\{f_i:U_i\to U\}_{i\in I}$ covering family and $g:V\to U$ morphism, there exists a covering family $\{h_j:V_j\to V\}$ such that each composite $g \circ h_j$ factors through some $f_i$.
@@ -172,17 +176,18 @@ Let $\cat$ be any small category.
 \end{enumerate}
 \end{definition}
 
-\begin{example}
+\begin{example}\label{Ex:CatOpX}
 	Given a topological space $X$, the category $\cat[Op](X)$ is a site.
 	Here a covering family for an open set $U$ is a family of open sets $U_i \hookrightarrow U$ such that $\cup_{i\in I}U_i = U$. 
 \end{example}
-Actually it is more! Is a Grothendieck pretopology:
-
-\begin{definition}[Grothendieck pretopology]
-A Grothendieck pretopology on $\cat$ is an assignment to each object  $U$ of $C$ of a collection of families $\{U_i \to U\}$ of morphisms, called \emph{covering families} such that
+%
+A Grothendieck pretopology is a coverage with some extra properties.
+%
+\begin{definition}[Grothendieck pretopology]\label{Def:GrotPretop}
+A Grothendieck pretopology on $\cat$ is an assignment to each object  $U$ of $\cat$ of a collection of families $\{U_i \to U\}$ of morphisms, called \emph{covering families} such that
 \begin{enumerate}
 	\item (Stability under base changes.)
-The collection of covering families is stable under pullback: if $\{U_i \to U\}$ is a covering family and $f : V \to U$ is any morphism in $C$, then $\{f^* U_i \to V\}$ exists and is a covering family;
+The collection of covering families is stable under pullback: if $\{U_i \to U\}$ is a covering family and $f : V \to U$ is any morphism in $\cat$, then $\{f^* U_i \to V\}$ exists and is a covering family;
 	\item (Stability under composition.)
 If $\{U_i \to U\}_{i \in I}$ is a covering family and for each $i$ also $\{U_{i,j} \to U_i\}_{j \in J_i}$ is a covering family, then also the family of composites $\{U_{i,j} \to U_i \to U\}_{i\in I, j \in J_i}$ is a covering family.
 	\item (Isomorphisms cover.)
@@ -190,8 +195,7 @@ Every family consisting of a single isomorphism $\{V \stackrel{\cong}{\to}U\}$ i
 \end{enumerate}
 \end{definition}
 
-N.b. condition 1) of the previous two definitions are equivalent.
-
+N.b. condition 1. in \cref{Def:GrotPretop} corresponds to \cref{Def:coverage}.
 
 
 
@@ -237,7 +241,7 @@ A \emph{concrete site} is a site whose objects can be thought of as sets with ex
    $$
      \coprod_i \Hom_{\cat} (*,f_i) : \coprod_i \Hom_{\cat} (*, U_i) \to \Hom_{\cat} (*, U) 
    $$
-   is surjective.
+   is surjective\footnote{Recall that the coproduct $\coprod$ in $\Set$ is given by the \emph{disjoint union}.}.
 	\end{enumerate}
 \end{definition}
 
@@ -279,9 +283,9 @@ In a category of presheaves on a concrete site one can consider concrete preshea
 	What does it mean for a presheaf to be concrete?
 	 We can regard a concrete presheaf as a set equipped with additional structure. \\
 	%
-	When regarding a sheaf as a space defined by how it is probed by test spaces (cf. functorial geometry), a concrete sheaf is a generalized space that has an underlying set of points out of which it is built.
+	When regarding a sheaf as a space defined by how it is probed by test spaces, a concrete sheaf is a generalized space that has an underlying set of points out of which it is built.
 	So a concrete sheaf models a space that is given by a set of points and a choice of which morphisms of sets from concrete test spaces into it count as “structure preserving” (e.g. count as smooth, when the sheaf models a smooth space).
-	%
+	\\
 	First, for $U \in \cat$, let $|U|=\Hom_{\cat}(*,U)$ denote the underlying set. 
 	Note that we can regard $\Hom_{\cat}(U, V) \subseteq \Hom_{\Set} (|U|, |V|)$, since the functor $\Hom_{\cat}(*,\cdot)$  is \href{https://ncatlab.org/nlab/show/faithful+functor}{faithful}.
 	A concrete presheaf \(X\) is then given by:
@@ -304,7 +308,7 @@ This data defines a concrete presheaf \(X : \cat^{\mathrm{op}} \to \mathbf{Set}\
 
 
 
-To define a natural transformation between concrete presheaves \(X \to Y\) is to give a function \(|X| \to |Y|\) that preserves the relations.
+To define a natural transformation between concrete presheaves \(X \Rightarrow Y\) is to give a function \(|X| \to |Y|\) that preserves the relations.
 
 \begin{definition}[Concrete Sheaves on Concrete Sites] \label{ConcSheafOnConcSite}
 Let $\mathrm{Conc}(\mathrm{Sh}(\cat)) \hookrightarrow \mathrm{Sh}(\cat)$ denote the \emph{full subcategory} of the \emph{category of sheaves} consisting of concrete sheaves.
@@ -332,14 +336,14 @@ If a category $\cat$ has \emph{\href{https://ncatlab.org/nlab/show/pullback}{pul
 	Let $\cat$ be a category with pullbacks.
 	A coverage is said to be \emph{cartesian} if for any \(\{f_i : U_i \to U\}_{i \in I}\)  covering family and \(g : V \to U\) morphism, then the family of pullbacks \(\{g^*(f_i) : g^*U_i \to V\}\) is a covering family of \(V\).
 \end{definition}
-Via a certain \href{https://ncatlab.org/nlab/show/coverage\#saturation_conditions}{"saturation condition"}, in a category with pullbacks, every coverage is equivalent to one satisfying this stronger condition.
+Via a certain \href{https://ncatlab.org/nlab/show/coverage\#saturation_conditions}{"saturation condition"}, in a category with pullbacks, every coverage is equivalent to one satisfying this stronger condition. (cf. condition 1. in \cref{Def:GrotPretop}).
 
 \begin{definition}[Cartesian Sites]
-	A \emph{Cartesian site} is a small category \( \cat \) equipped with a cartesian coverage, which is \href{https://ncatlab.org/nlab/show/finitely+complete+category\#definition}{finitely complete} and admits coproducts.
+	A \emph{Cartesian site} is a small category \( \cat \) equipped with a cartesian coverage, which is \href{https://ncatlab.org/nlab/show/finitely+complete+category\#definition}{finitely complete} and admits coproducts\footnote{This definition is not completely standard. Usually a category is said to be \emph{Cartesian} when it admits all finite limits, i.e. finitely complete.}.
 \end{definition}
 
 
-In a cartesian sites the condition of being subcanonical can be expressed as follows
+In a Cartesian sites the condition of being subcanonical can be expressed as follows
 \begin{lemma}[{\cite[Pag. 20, Prop. 2.1.13]{Blohmann24}}]\label{lem:subcanon-bloh}
 	Let $\cat$ be a Cartesian site.
 	The site $\cat$ is subcanonical iff for every covering family $\{U_i\to U\}$ the following diagram is a \emph{coequalizer}
@@ -350,10 +354,10 @@ In a cartesian sites the condition of being subcanonical can be expressed as fol
 		\end{equation}
 \end{lemma}
 %
-In a category such example \cref{ex:topolo-presheaf}, The pullback $U_i\times_U U_j = U_i \cap U_j$ is the intersection, so that the
+In the category given in \cref{ex:topolo-presheaf}, the pullback $U_i\times_U U_j = U_i \cap U_j$ is given by the intersection, so that the
 coequalizer can be interpreted geometrically as glueing the open subsets $U_i$ along their intersections. 
 A sheaf is a contravariant functor that preserves this glueing.
-When $\cat$ has pullbacks (of covering families), the condition for a presheaf \(X\) to be a sheaf Can be expressed more familiarly as follows.
+When $\cat$ has pullbacks (of covering families), the condition for a presheaf \(X\) to be a sheaf can be expressed more familiarly as follows.
 
 \begin{lemma}
 	Let $\cat$ be a Cartesian site.
@@ -367,11 +371,12 @@ When $\cat$ has pullbacks (of covering families), the condition for a presheaf \
 
 
 %---------------------------------------------------------------------------------------------------------%
+\clearpage
 \section{ Diffeological Spaces as a Category of Concrete Sheaves}
 %---------------------------------------------------------------------------------------------------------%
 %
 The foundational observation for a categorical approach to diffeological spaces is that a \emph{diffeology} \(\cat[D]\) on a set \(X\) can be understood as a \emph{presheaf} on the category of open subsets of Euclidean spaces, with smooth maps as morphisms. 
-Specifically, to each open set \(U \subseteq \Real^n\), it assigns a subset of \(\text{Set}(U, X)\), the set of all functions from \(U\) to \(X\) prescribed to be "smooth". 
+Specifically, to each open set \(U \subseteq \Real^n\), it assigns a subset of $\Hom_{\Set}(U,X)$, the set of all functions from \(U\) to \(X\) prescribed to be "smooth". 
 A \emph{diffeological space} is then defined as a set equipped with a diffeology.
 
 
@@ -406,24 +411,25 @@ a cover along a smooth map is a cover.}.
 \begin{proof}
 	\vspace{5em}
 \end{proof}
-
-\cref{thm:diffeological-as-sheaves} provides a bridge between two equivalent descriptions of diffeological spaces, each offering distinct advantages. 
+%
+\Cref{thm:diffeological-as-sheaves} provides a bridge between two equivalent descriptions of diffeological spaces, each offering distinct advantages. 
 The geometric definition, based on plots, excels in explicit computations, describing examples, and connecting with classical methods of analysis and differential geometry. 
-In contrast, the categorical definition, framed in terms of concrete sheaves, is more effective for abstract structural analysis, understanding universal properties, and exploring modern developments in areas like homotopy theory and higher geometric structures.
+In contrast, the categorical definition, framed in terms of concrete sheaves, is more effective for abstract structural analysis, understanding universal properties, and exploring developments in areas like homotopy theory and higher geometric structures.
 
 \begin{remark}
 	Open sets in $\Real^n$ can be naturally seen as diffeological spaces.
 	In other terms, one has a full and faithful functor\cite[Prop. 2.1.14]{Blohmann24}
 	$$ y:\Eucl \to \Dflg~.$$
-
 \end{remark}
 
 %---------------------------------------------------------------------------------------------------------%
+\clearpage
 \section{Some categorical Properties of $\Dflg$}
 %---------------------------------------------------------------------------------------------------------%
 %
-In the context of category theory, a category is termed "convenient" if it possesses certain properties that make it particularly useful for mathematical constructions.
- Specifically, a convenient category typically has the following characteristics (see Prop 2.1.12 in \cite{Blohmann24} and \cite{Baez2011}).
+In category theory, a category is referred to as "convenient" if it has specific properties that enhance its utility for abstract mathematical constructions. 
+This section discusses the characteristics that make \(\mathrm{Conc}(\mathrm{Sh}(\mathbb{E}uclidean)) \cong \Dflg\) a convenient category. 
+For more details, see Proposition 2.1.12 in \cite{Blohmann24} and \cite{Baez2011}.
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -%
 \subsection{Cartesian closed -- Mapping spaces}
@@ -431,8 +437,10 @@ In the context of category theory, a category is termed "convenient" if it posse
 %
 
 
-The category $\Dflg$ is \emph{locally cartesian closed}. This means that for every object $X \in \Dflg$, the overcategory $\Dflg \downarrow X$ is cartesian closed. 
-When $X = *$, from the definition of concretness, \(\Dflg \downarrow * \cong \Dflg\), and the fiber product reduces to the usual product in $\Dflg$. The exponential objects in $\Dflg$ are denoted by 
+The category $\Dflg$ is \emph{locally cartesian closed}. This means that for every object $X \in \Dflg$, the overcategory $\Dflg \downarrow X$ is cartesian closed (see \cref{def:overcat} and \cref{def:CartClosed}) . 
+
+When \(X = *\), it follows from the definition of concreteness that \(\Dflg \downarrow * \cong \Dflg\), and the fiber product reduces to the usual product in \(\Dflg\). 
+The exponential objects (see \cref{def:expoObj}) in $\Dflg$ are denoted by 
 $$
 	\Hom_{\Dflg}(X,Y) \cong Y^X
 $$
@@ -544,7 +552,7 @@ f^*Y := Y \times_{\overline{Y}} \overline{S}.
 $$
 \end{definition}
 
-\begin{definition}[Pushforward Diffeology, Definition 2.1.28]
+\begin{definition}[Pushforward Diffeology]
 Let \(X\) be a diffeological space and \(|X| \to S\) a map of sets, which we view as a morphism \(f : \ddot{X} \to \ddot{S}\), where \(\ddot{S}\) and \(\ddot{x}\) denote the discrete diffeology. Then the \emph{pushforward diffeology} on \(S\) is defined as:
 $$
 f_*X := \ddot{S}  \sqcup_{\ddot{X}} X.
@@ -584,6 +592,7 @@ This relationship is analogous to the ordering of topologies: a topology \(\math
 
 
 %---------------------------------------------------------------------------------------------------------%
+\clearpage
 \appendix
 \section*{Appendix: Basic stuff}
 %---------------------------------------------------------------------------------------------------------%
@@ -624,7 +633,7 @@ The structure of the slice category $\cat \downarrow c$ is summarized by the fol
 \end{displaymath}
 \end{definition}
 
-\begin{definition}[Exponential object]
+\begin{definition}[Exponential object]\label{def:expoObj}
 Let $X$ and $Y$ be objects of a category $\cat$ such that all binary products with $Y$ exist.  
 (Usually, $C$ actually has all binary products.)  
 Then an \emph{exponential object} is an object $X^Y$ equipped with an evaluation map $\mathrm{ev}\colon X^Y \times Y \to X$ which is universal in the sense that, given any object $Z$ and map $e\colon Z \times Y \to X$, there exists a unique map $u\colon Z \to X^Y$ such that
@@ -637,7 +646,7 @@ The map $u$ is known by various names such as  currying  of $e$.
 As with other  universal constructions, an exponential object, if any exists, is  unique up to unique isomorphism].
 \end{definition}
 
-\begin{definition}[Cartesian closed category\cite{MacLane1978}]
+\begin{definition}[Cartesian closed category\cite{MacLane1978}]\label{def:CartClosed}
 The category $\cat$ is called \emph{Cartesian closed} \emph{if and only if} it satisfies the following three properties:
 
 \begin{itemize}
