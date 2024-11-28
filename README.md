@@ -18,13 +18,11 @@ The notes include a concise introduction to diffeological spaces, the concept of
 ## Prerequisites
 
 To fully appreciate the material, familiarity with the following topics is recommended:
-- Presheaves and the Yoneda Lemma
-- Grothendieck Topologies and Sites
-- Sheaves and Concrete Sheaves
-- Quasitopoi and Categorical Concepts
+- Basic definitions: Category, natural transformations
+- Limits and colimits
 
 ## Contributions
-Contributions and feedback are welcome! Please open an issue or submit a pull request if you have suggestions for improving the notes.
+Contributions and feedback are welcome! If you have suggestions for improving the notes, please open an issue or submit a pull request.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
