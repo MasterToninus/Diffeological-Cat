@@ -8,6 +8,9 @@ Diffeological spaces generalize smooth manifolds, providing a robust framework f
 
 The notes include a concise introduction to diffeological spaces, the concept of a concrete site, and concrete sheaves. They demonstrate that \( \mathbf{Diff} \) can be identified as a category of "concrete sheaves on a concrete site," making it an archetypal example of a "generalized space." The notes also detail structural properties of this class of categories, emphasizing that any category of concrete sheaves on a concrete site—including \( \mathbf{Diff} \)—is a quasitopos, with all limits and colimits.
 
+## Current State
+The current version, [demo.pdf](build/demo.pdf), is missing some diagrams and proofs.
+
 ## Repository Structure
 
 - `notes/`: Contains detailed LaTeX files for the lecture notes.
